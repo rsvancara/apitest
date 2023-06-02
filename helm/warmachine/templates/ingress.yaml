@@ -1,0 +1,19 @@
+{{- $fullName := include "warmachine.fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: warmachine 
+  namespace: default
+spec:
+  rules:
+  - host: warmachine.stage.pages
+    http:
+      paths:
+      - backend:
+          serviceName: {{ $fullName }}
+          servicePort: {{ $svcPort }}
+        path: /
