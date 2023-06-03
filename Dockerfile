@@ -1,4 +1,4 @@
-FROM  golang:1.16.7-alpine3.14 as builder
+FROM  golang:1.20.4-alpine3.18 as builder
 
 #ENV GOPATH /usr/local/go
 #ENV PATH $GOPATH/bin:$PATH
@@ -8,7 +8,7 @@ RUN mkdir -p /app && \
     mkdir -p /BUILD && \
     mkdir -p /BUILD/db
 
-# Build the 411 binary
+# Build the rainier binary
 COPY cmd /BUILD/cmd
 COPY go.sum  /BUILD/go.sum
 COPY go.mod /BUILD/go.mod
@@ -35,7 +35,7 @@ COPY sites /app/sites
 
 WORKDIR /app
 
-USER 411
-EXPOSE 5000
+USER web
+EXPOSE 5001
     
 CMD ["./rainier"]
