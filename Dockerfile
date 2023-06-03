@@ -14,7 +14,7 @@ COPY go.sum  /BUILD/go.sum
 COPY go.mod /BUILD/go.mod
 COPY internal /BUILD/internal
 RUN cd /BUILD && go mod vendor && go mod download
-RUN cd /BUILD && go build -o /BUILD/warmachine cmd/warmachine/main.go 
+RUN cd /BUILD && go build -o /BUILD/rainier cmd/rainier/main.go 
 
 
 
@@ -30,7 +30,7 @@ RUN mkdir /app && \
     chmod 1777 app/temp 
 
 #Copy Stuff
-COPY --from=builder /BUILD/warmachine /app/warmachine
+COPY --from=builder /BUILD/rainier /app/rainier
 COPY sites /app/sites
 
 WORKDIR /app
@@ -38,4 +38,4 @@ WORKDIR /app
 USER 411
 EXPOSE 5000
     
-CMD ["./warmachine"]
+CMD ["./rainier"]
